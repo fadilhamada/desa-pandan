@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.5"
+  },
+  "dependencies": {
+    "datatables.net-dt": "^2.0.8"
+  }
+}

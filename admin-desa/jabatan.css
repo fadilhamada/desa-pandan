@@ -1,0 +1,28 @@
+#margin-toggle #tambah {
+    background-color: blue;
+    padding: 0.75rem 0.5rem;
+}
+
+#margin-toggle .margin-top {
+    margin-top: 1.5rem;
+}
+
+table tbody td {
+    padding: 1rem 0; 
+}
+
+table thead th {
+    padding: 0.75rem 0.75rem;
+}
+
+#blue {
+    background-color: blue;
+    padding: 0.25rem 0.5rem;
+}
+#red {
+    background-color: red;
+}
+
+.overflow-x-auto {
+    margin-top: 2rem;
+}

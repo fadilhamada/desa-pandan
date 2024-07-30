@@ -1,0 +1,22 @@
+#width-toggle {
+    height: 100vh;
+    border-right: 2px solid white;
+}
+
+#width-toggle div {
+    padding-top: 1.2rem;
+}
+
+#width-toggle ul li a {
+    padding: 0.5rem 2.5rem;
+    text-decoration: none;
+    
+}
+
+#data div {
+    padding: 1.5rem 0;
+}
+
+#data div p {
+    margin-bottom: 0.7rem;
+}
