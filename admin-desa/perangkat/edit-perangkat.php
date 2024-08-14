@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../admin.css">
   <link rel="stylesheet" href="./jabatan.css">
+  <title>Perangkat | Web Desa Pandan</title>
 
     <style>
         #margin {
@@ -71,14 +72,14 @@
         <div class="px-5 py-2">
             <div class="font-bold py-3 text-base flex gap-3 mb-3">
                 <a href="/web-desa/admin-desa/dashboard.php">Dashboard</a>
-                <p>></p>
+                <p>/</p>
                 <a href="/web-desa/admin-desa/perangkat-desa.php">Perangkat</a>
-                <p>></p>
+                <p>/</p>
                 <h1 class="text-[#06D001]">Tambah data</h1>
             </div>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="mb-5">
-                    <input type="hidden" name="gambarLama" id="gambarLama" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan jabatan" value="<?= $data['gambar']; ?>" required>
+                    <input type="hidden" name="gambarLama" id="gambarLama" class="border px-3 py-1 rounded-md w-full outline-none" value="<?= $data['gambar']; ?>" required>
                     <label for="nama" class="block mb-2">Nama</label>
                     <input type="text" name="nama" id="nama" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan jabatan" value="<?= $data['nama']; ?>" required>
                 </div>

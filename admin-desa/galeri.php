@@ -1,6 +1,17 @@
 <?php
+session_start();
+if(!isset($_SESSION['username'])) {
+    return header("Location: login.php");
+    exit;
+}
 
 require 'function.php';
+
+$jumDataHalaman = 4;
+$jumData = count(jabatan("SELECT * FROM galeri"));
+$jumHalaman = ceil($jumData / $jumDataHalaman);
+$actived = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$dataAwal = ($jumDataHalaman * $actived) - $jumDataHalaman;
 
 $galeri = jabatan("SELECT * FROM galeri");
 
@@ -24,17 +35,9 @@ $galeri = jabatan("SELECT * FROM galeri");
   
 </head>
 <body>
-<div class="w-full fixed top-0 left-0 py-5 bg-white border-b z-10">
-    <div class="px-7">
-        <div class="flex justify-between">
-            <div class="flex gap-10">
-                <h1>Desa Pandan</h1>
-                <button id="toggle"><i class="fa-solid fa-bars"></i></button>
-            </div>
-            <a href="/">Admin</a>
-        </div>
-    </div>
-</div>
+<?php
+    include '../header.php'
+?>
 <div class="flex">
     <?php
         include '../sidebar.php'
@@ -51,7 +54,7 @@ $galeri = jabatan("SELECT * FROM galeri");
                 <a href="/web-desa/admin-desa/galeri/post-galeri.php" class="px-4 py-2 bg-blue-500 font-semibold text-white rounded-md" id="tambah">Tambah Data</a>
                 <div class="overflow-x-auto mt-8">
             </div>
-                <table class="text-sm text-left w-full">
+                <table class="text-sm text-left w-full mb-5">
                     <thead class="text-xs uppercase bg-white text-center shadow-md">
                         <tr class="border-b border-t border-black">
                             <th scope="col" class="px-3 py-3 text-left">
@@ -90,6 +93,13 @@ $galeri = jabatan("SELECT * FROM galeri");
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php for($i = 1; $i <= $jumHalaman; $i++) : ?>
+                    <?php if($i == $actived) : ?>
+                        <a href="?page=<?= $i; ?>" class="border text-white px-3 py-2 bg-[#06D001] rounded-md"><?= $i; ?></a>
+                    <?php else :  ?>
+                        <a href="?page=<?= $i; ?>" class="border px-3 py-2 rounded-md"><?= $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
             </div>
         </div>
     </div>

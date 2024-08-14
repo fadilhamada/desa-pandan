@@ -1,0 +1,13 @@
+Options -Indexes
+
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteRule ^profil-desa$ profile.php [L]
+RewriteRule ^visi-misi$ visi-misi.php [L]
+RewriteRule ^perangkat$ perangkat.php [L]
+RewriteRule ^berita$ berita.php [L]
+RewriteRule ^galeri$ galeri.php [L]
+RewriteRule ^kontak$ kontak.php [L]
+
+Redirect 301 /dashboard.php /index.php

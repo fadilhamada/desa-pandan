@@ -1,8 +1,22 @@
 <?php
+session_start();
+if(!isset($_SESSION['username'])) {
+    return header("Location: login.php");
+    exit;
+}
 
 require 'function.php';
 
-$berita = jabatan("SELECT * FROM berita");
+$jumDataHalaman = 4;
+$jumData = count(jabatan("SELECT * FROM berita"));
+$jumHalaman = ceil($jumData / $jumDataHalaman);
+$actived = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$dataAwal = ($jumDataHalaman * $actived) - $jumDataHalaman;
+
+$berita = jabatan("SELECT * FROM berita ORDER BY id DESC LIMIT $dataAwal, $jumDataHalaman");
+
+// $berita = jabatan("SELECT * FROM berita");
+
 
 ?>
 
@@ -19,22 +33,20 @@ $berita = jabatan("SELECT * FROM berita");
   <link rel="stylesheet" href="./jabatan.css">
 
     <style>
- 
+        #text {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            height: 4.9rem;
+            overflow: hidden;
+        }
     </style>
   
 </head>
 <body>
-<div class="w-full fixed top-0 left-0 py-5 bg-white border-b z-10">
-    <div class="px-7">
-        <div class="flex justify-between">
-            <div class="flex gap-10">
-                <h1>Desa Pandan</h1>
-                <button id="toggle"><i class="fa-solid fa-bars"></i></button>
-            </div>
-            <a href="/">Admin</a>
-        </div>
-    </div>
-</div>
+<?php
+    include '../header.php'
+?>
 <div class="flex">
     <?php
         include '../sidebar.php'
@@ -51,7 +63,7 @@ $berita = jabatan("SELECT * FROM berita");
                 <a href="/web-desa/admin-desa/berita/post-berita.php" class="px-4 py-2 bg-blue-500 font-semibold text-white rounded-md" id="tambah">Tambah Data</a>
                 <div class="overflow-x-auto mt-8">
             </div>
-                <table class="text-sm text-left w-full">
+                <table class="text-sm text-left w-full mb-5">
                     <thead class="text-xs uppercase bg-white text-center shadow-md">
                         <tr class="border-b border-t border-black">
                             <th scope="col" class="px-3 py-3 text-left">
@@ -60,16 +72,13 @@ $berita = jabatan("SELECT * FROM berita");
                             <th scope="col" class="px-3 py-3">
                                 Gambar
                             </th>
-                            <th scope="col" class="px-3 py-3">
+                            <th scope="col" class="px-3 py-3 w-64 text-center">
                                 Judul
                             </th>
                             <th scope="col" class="px-3 py-3">
                                 Tanggal upload
                             </th>
-                            <th scope="col" class="px-3 py-3">
-                                Deskripsi singkat
-                            </th>
-                            <th scope="col" class="px-3 py-3">
+                            <th scope="col" class="px-3 py-3 w-64 text-center">
                                 Deskripsi
                             </th>
                             <th scope="col" class="px-3 py-3">
@@ -87,17 +96,14 @@ $berita = jabatan("SELECT * FROM berita");
                         <td class="px-3 py-4">
                             <img src="img/<?= $b['gambar']; ?>" alt="" width="50" class="mx-auto">
                         </td>
-                        <td class="px-3 py-4">
+                        <td class="px-3 py-4 w-64 text-center">
                             <?= $b['judul']; ?>
                         </td>
                         <td class="px-3 py-4">
                             <?= $b['tanggal']; ?>
                         </td>
-                        <td class="px-3 py-4">
-                            <?= $b['deskripsi_singkat']; ?>
-                        </td>
-                        <td class="px-3 py-4">
-                            <?= $b['deskripsi']; ?>
+                        <td class="px-3 py-4 w-64 text-center" id="text">
+                            <?= nl2br($b['deskripsi']); ?>
                         </td>
                         <td class="px-3 py-4 text-white">
                            <button class="px-2 py-1 rounded-md" id="blue"><a href="berita/edit-berita.php?id=<?= $b['id']; ?>">Edit</a></button>
@@ -108,6 +114,13 @@ $berita = jabatan("SELECT * FROM berita");
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php for($i = 1; $i <= $jumHalaman; $i++) : ?>
+                    <?php if($i == $actived) : ?>
+                        <a href="?page=<?= $i; ?>" class="border text-white px-3 py-2 bg-[#06D001] rounded-md"><?= $i; ?></a>
+                    <?php else :  ?>
+                        <a href="?page=<?= $i; ?>" class="border px-3 py-2 rounded-md"><?= $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
             </div>
         </div>
     </div>

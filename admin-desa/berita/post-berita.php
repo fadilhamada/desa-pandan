@@ -31,6 +31,9 @@
         .mb-3 {
             margin-bottom: 1rem;
         }
+        .height {
+            height: 13rem;
+        }
         .mb-2 {
             margin-bottom: 1rem;
         }
@@ -75,12 +78,8 @@
                     <input type="text" name="judul" id="judul" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan judul" required>
                 </div>
                 <div class="mb-5">
-                    <label for="deskripsi_singkat" class="block mb-2">Deskripsi singkat</label>
-                    <input type="text" name="deskripsi_singkat" id="deskripsi_singkat" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan deskripsi singkat" required>
-                </div>
-                <div class="mb-5">
                     <label for="deskripsi" class="block mb-2">Deskripsi</label>
-                    <input type="text" name="deskripsi" id="deskripsi" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan deskripsi" required>
+                    <textarea name="deskripsi" id="deskripsi" class="border w-full height rounded-md px-3 py-2" placeholder="Masukkan deskripsi" required></textarea>
                 </div>
                 <div class="mb-5">
                     <label for="gambar" class="block mb-2">Gambar</label>
@@ -88,7 +87,7 @@
                 </div>
                 <div class="flex justify-end gap-4">
                     <button type="submit" name="submit" class="bg-blue-500 text-white px-3 py-2 rounded-md shadow-md">Simpan</button>
-                    <a href="/web-desa/admin-desa/berita.php" class="bg-red-500 text-white px-3 py-2 rounded-md shadow-md">Kembali</a>
+                    <a href="../berita.php" class="bg-red-500 text-white px-3 py-2 rounded-md shadow-md">Kembali</a>
                 </div>
             </form>
         </div>

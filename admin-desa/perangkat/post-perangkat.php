@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="../admin.css">
   <link rel="stylesheet" href="./jabatan.css">
+  <title>Perangkat | Web Desa Pandan</title>
 
     <style>
         #margin {

@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['username'])) {
+    return header("Location: login.php");
+    exit;
+}
 
 require 'function.php';
 
@@ -24,17 +29,9 @@ $jabatan = jabatan("SELECT * FROM jabatan");
   
 </head>
 <body>
-<div class="w-full fixed top-0 left-0 py-5 bg-white border-b z-10">
-    <div class="px-7">
-        <div class="flex justify-between">
-            <div class="flex gap-10">
-                <h1>Desa Pandan</h1>
-                <button id="toggle"><i class="fa-solid fa-bars"></i></button>
-            </div>
-            <a href="/">Admin</a>
-        </div>
-    </div>
-</div>
+<?php
+    include '../header.php'
+?>
 <div class="flex">
     <?php
         include '../sidebar.php'

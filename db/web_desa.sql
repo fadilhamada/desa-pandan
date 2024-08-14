@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Jul 2024 pada 07.13
+-- Waktu pembuatan: 13 Agu 2024 pada 10.33
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -31,7 +31,6 @@ CREATE TABLE `berita` (
   `id` int(11) NOT NULL,
   `judul` varchar(100) NOT NULL,
   `tanggal` varchar(100) NOT NULL,
-  `deskripsi_singkat` text NOT NULL,
   `deskripsi` text NOT NULL,
   `gambar` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,8 +39,10 @@ CREATE TABLE `berita` (
 -- Dumping data untuk tabel `berita`
 --
 
-INSERT INTO `berita` (`id`, `judul`, `tanggal`, `deskripsi_singkat`, `deskripsi`, `gambar`) VALUES
-(1, 'kngsjf', '2024 July 22', 'fkjdf', 'jklsdjfds', '669ddc1ecf708.jpg');
+INSERT INTO `berita` (`id`, `judul`, `tanggal`, `deskripsi`, `gambar`) VALUES
+(5, 'hfkiejhja;oo', 'August, 5 2024', 'kirfs', '66b0634cb626b.jpg'),
+(6, 'saya', 'August, 11 2024', 'jklfjasnfkans\r\nkkasjhklfh\r\n', '66b8612e55d9d.jpg'),
+(7, 'j;klefd', 'August, 12 2024', 'kj;kdnjs;kjf\r\n\\glj', '66b9a67c8a6c7.jpg');
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE `galeri` (
 
 INSERT INTO `galeri` (`id`, `keterangan`, `gambar`) VALUES
 (12, 'kgggg', '6698927ea099e.jpg'),
-(13, 'jijip', '6698a2411f0ad.png');
+(14, 'fkkhdss', '66a87d42bd32c.jpg');
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,26 @@ CREATE TABLE `jabatan` (
 
 INSERT INTO `jabatan` (`id`, `jabatan`) VALUES
 (1, 'kepala desa'),
-(2, 'wakil kepala desa');
+(2, 'wakil kepala desa'),
+(8, 'saya');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `misi`
+--
+
+CREATE TABLE `misi` (
+  `id` int(11) NOT NULL,
+  `deskripsi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `misi`
+--
+
+INSERT INTO `misi` (`id`, `deskripsi`) VALUES
+(2, 'jjiijgslof');
 
 -- --------------------------------------------------------
 
@@ -106,6 +126,45 @@ INSERT INTO `perangkat` (`id`, `nama`, `gambar`, `id_jabatan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `potensi`
+--
+
+CREATE TABLE `potensi` (
+  `id` int(11) NOT NULL,
+  `judul` varchar(100) NOT NULL,
+  `tanggal` text NOT NULL,
+  `deskripsi` text NOT NULL,
+  `gambar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `potensi`
+--
+
+INSERT INTO `potensi` (`id`, `judul`, `tanggal`, `deskripsi`, `gambar`) VALUES
+(2, 'hvdskkjds', 'August, 10 2024', 'jk\r\n1. shfklsdhflhdskf\r\n2. jv', '66b6b574220c6.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `profil_desa`
+--
+
+CREATE TABLE `profil_desa` (
+  `id` int(11) NOT NULL,
+  `deskripsi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `profil_desa`
+--
+
+INSERT INTO `profil_desa` (`id`, `deskripsi`) VALUES
+(1, 'ljla');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `user`
 --
 
@@ -113,21 +172,39 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
+  `pass` varchar(100) NOT NULL,
   `j_kelamin` varchar(100) NOT NULL,
-  `no` int(11) NOT NULL,
+  `no_hp` int(11) NOT NULL,
   `alamat` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL
+  `jenis` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `username`, `password`, `j_kelamin`, `no`, `alamat`, `type`) VALUES
-(6, 'jtrhtr', 'ntrht', '$2y$10$soUn1eyDJBItHU3RoJI9YucSyuW2dc.XOvPc9xPcZseriqjaANP7O', 'perempuan', 3412421, 'vdsd', 'admin'),
-(7, 'admin', 'admin', '$2y$10$kMVoXoVgdugDnnqc8//vSexVFoDoirvVTYNspFMx0LyBuaVyISmae', 'laki-laki', 3129721, 'clkdklndc', 'admin'),
-(8, 'super admin', 'superadmin', '$2y$10$PusK4wqhLVMWtoi1AdCcUOVOD7/X5hKZMYpnCkXgCZGFyyMfN8B5q', 'laki-laki', 979563, 'klhhsdjg', 'super admin');
+INSERT INTO `user` (`id`, `nama`, `username`, `pass`, `j_kelamin`, `no_hp`, `alamat`, `jenis`) VALUES
+(7, 'admin', 'admin', '$2y$10$kMVoXoVgdugDnnqc8//vSexVFoDoirvVTYNspFMx0LyBuaVyISmae', 'perempuan', 312, 'clkdklndc', 'admin'),
+(8, 'super admin', 'superadmin', '$2y$10$PusK4wqhLVMWtoi1AdCcUOVOD7/X5hKZMYpnCkXgCZGFyyMfN8B5q', 'laki-laki', 979563, 'klhhsdjg', 'super admin'),
+(9, 'fadil', 'fadil', '$2y$10$6iPl3vCYYsZi4D1vlz709esebLr835ut8ln1YJ1JD9n.fok2DCmju', 'laki-laki', 87684935, 'hkjhsdhf', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `visi`
+--
+
+CREATE TABLE `visi` (
+  `id` int(11) NOT NULL,
+  `deskripsi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `visi`
+--
+
+INSERT INTO `visi` (`id`, `deskripsi`) VALUES
+(13, 'vdskjkv\r\n1. kvdhjkslhl\r\n2. kfkhd\r\n3. jkvlfjs');
 
 -- --------------------------------------------------------
 
@@ -178,6 +255,12 @@ ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `misi`
+--
+ALTER TABLE `misi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `perangkat`
 --
 ALTER TABLE `perangkat`
@@ -185,9 +268,27 @@ ALTER TABLE `perangkat`
   ADD KEY `Perangkat_id_jabatan_fkey` (`id_jabatan`);
 
 --
+-- Indeks untuk tabel `potensi`
+--
+ALTER TABLE `potensi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `profil_desa`
+--
+ALTER TABLE `profil_desa`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `visi`
+--
+ALTER TABLE `visi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -204,31 +305,55 @@ ALTER TABLE `_prisma_migrations`
 -- AUTO_INCREMENT untuk tabel `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `galeri`
 --
 ALTER TABLE `galeri`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `misi`
+--
+ALTER TABLE `misi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `perangkat`
 --
 ALTER TABLE `perangkat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT untuk tabel `potensi`
+--
+ALTER TABLE `potensi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `profil_desa`
+--
+ALTER TABLE `profil_desa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `visi`
+--
+ALTER TABLE `visi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

@@ -23,15 +23,21 @@ if(isset($_POST['submit'])) {
   $data = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
   if(mysqli_num_rows($data) === 1) {
     $row = mysqli_fetch_assoc($data);
-    if(password_verify($pass, $row['password'])) {
+    if(password_verify($pass, $row['pass'])) {
+      $_SESSION['id'] = $row['id'];
+      $_SESSION['nama'] = $row['nama'];
       $_SESSION['username'] = $row['username'];
+      $_SESSION['kelamin'] = $row['j_kelamin'];
+      $_SESSION['no'] = $row['no_hp'];
+      $_SESSION['alamat'] = $row['alamat'];
+      $_SESSION['jenis'] = $row['jenis'];
       header("Location: dashboard.php");
       exit;
       
     } 
   } 
   echo "<script>
-            alert('Silahkan isi data yang masih kosong');
+            alert('Username atau password salah');
         </script>";
 }
 
@@ -48,8 +54,17 @@ if(isset($_POST['submit'])) {
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="./admin.css">
   <link rel="stylesheet" href="./jabatan.css">
+    <!-- Font google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Login Admin | Web Desa Pandan</title>
 
     <style>
+      body {
+            background-color: #F5F7F8;
+            font-family: "Poppins", sans-serif;
+        }
         .bg {
           width: 100%;
           height: 100vh;
@@ -68,21 +83,40 @@ if(isset($_POST['submit'])) {
           transform: translate(-50%, -50%);
         } */
         #width {
-          width: 70%;
+          width: 30%;
         }
         #submit {
           background-color: #06D001;
+        }
+        #image {
+          width: 10rem;
+          height: 10rem;
+        }
+
+        @media (max-width: 540px) {
+          #width {
+            width: 80%;
+          }
+          #image {
+            width: 10rem;
+            height: 10rem;
+          }
         }
     </style>
   
 </head>
 <body>
-<div class="bg-[#06D001]">
-  <div class="bg flex justify-center items-center">
-    <div class="bg-white shadow-md rounded-md px-5 py-2 flex gap-7" id="width">
+  <div class="bg flex flex-col justify-center items-center">
+    <div id="image">
+      <img src="../assets/pemkab.png" alt="">
+    </div>
+    <div class="mb-2">
+      <h1 class="font-semibold">Admin Desa Pandan</h1>
+    </div>
+    <div class="bg-white shadow-md rounded-md px-5 py-2" id="width">
       <div class="w-full">
         <div class="my-2 py-2 border-b">
-          <h1 class="text-xl font-semibold">Selamat Datang</h1>
+          <h1 class="text-xl font-semibold">Selamat Datang Admin</h1>
         </div>
         <form action="" method="POST">
               <div class="mb-5">
@@ -95,17 +129,12 @@ if(isset($_POST['submit'])) {
               </div>
               <div class="mb-5 w-full">
                   <button type="submit" name="submit" id="submit" class="w-full py-2 rounded-md font-semibold text-white">Login</button>
-              </div>
-              
+              </div>   
           </form>
-        </div>
-        <div class="w-full">
-          <img src="../assets/login2.jpeg" alt="" class="rounded-md">
         </div>
       </div>
     </div>
   </div>
-</div>
 
 <script src="./script.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>

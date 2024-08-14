@@ -115,13 +115,6 @@
                             <label for="alamat" class="block mb-2">Alamat</label>
                             <input type="text" name="alamat" id="alamat" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan alamat" required>
                         </div>
-                        <div class="mb-5">
-                            <label for="" class="block mb-2">Type</label>
-                            <select name="type" id="type" class="border px-3 py-1 rounded-md w-full outline-none">
-                                <option value="admin">Admin</option>
-                                <option value="super admin">Super admin</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div class="flex justify-end gap-4">

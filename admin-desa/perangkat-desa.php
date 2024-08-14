@@ -1,8 +1,19 @@
 <?php
-
+session_start();
 require 'function.php';
 
-$data = jabatan("SELECT perangkat.id, nama, gambar, jabatan.jabatan FROM `perangkat` JOIN jabatan ON perangkat.id_jabatan = jabatan.id");
+if(!isset($_SESSION['username'])) {
+    return header("Location: login.php");
+    exit;
+}
+
+$jumDataHalaman = 4;
+$jumData = count(jabatan("SELECT * FROM perangkat"));
+$jumHalaman = ceil($jumData / $jumDataHalaman);
+$actived = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$dataAwal = ($jumDataHalaman * $actived) - $jumDataHalaman;
+
+$data = jabatan("SELECT perangkat.id, nama, gambar, jabatan.jabatan FROM `perangkat` JOIN jabatan ON perangkat.id_jabatan = jabatan.id LIMIT $dataAwal, $jumDataHalaman");
 
 ?>
 
@@ -17,6 +28,7 @@ $data = jabatan("SELECT perangkat.id, nama, gambar, jabatan.jabatan FROM `perang
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="./admin.css">
   <link rel="stylesheet" href="./jabatan.css">
+  <title>Perangkat | Web Desa Pandan</title>
 
     <style>
  
@@ -24,17 +36,9 @@ $data = jabatan("SELECT perangkat.id, nama, gambar, jabatan.jabatan FROM `perang
   
 </head>
 <body>
-<div class="w-full fixed top-0 left-0 py-5 bg-white border-b z-10">
-    <div class="px-7">
-        <div class="flex justify-between">
-            <div class="flex gap-10">
-                <h1>Desa Pandan</h1>
-                <button id="toggle"><i class="fa-solid fa-bars"></i></button>
-            </div>
-            <a href="/">Admin</a>
-        </div>
-    </div>
-</div>
+<?php
+    include '../header.php'
+?>
 <div class="flex">
     <?php
         include '../sidebar.php'
@@ -52,7 +56,7 @@ $data = jabatan("SELECT perangkat.id, nama, gambar, jabatan.jabatan FROM `perang
                 <div class="overflow-x-auto mt-8">
             </div>
             <?php  ?>
-                <table class="text-sm text-left w-full">
+                <table class="text-sm text-left w-full mb-5">
                     <thead class="text-xs uppercase bg-white text-center shadow-md">
                         <tr class="border-b border-t border-black">
                             <th scope="col" class="px-3 py-3 text-left">
@@ -97,6 +101,13 @@ $data = jabatan("SELECT perangkat.id, nama, gambar, jabatan.jabatan FROM `perang
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php for($i = 1; $i <= $jumHalaman; $i++) : ?>
+                    <?php if($i == $actived) : ?>
+                        <a href="?page=<?= $i; ?>" class="border text-white px-3 py-2 bg-[#06D001] rounded-md"><?= $i; ?></a>
+                    <?php else :  ?>
+                        <a href="?page=<?= $i; ?>" class="border px-3 py-2 rounded-md"><?= $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
             </div>
         </div>
     </div>

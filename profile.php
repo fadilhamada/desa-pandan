@@ -1,20 +1,39 @@
+<?php
+
+require 'admin-desa/function.php';
+
+$profil = jabatan("SELECT * FROM profil_desa");
+
+?>
+
 <!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="icon" type="image/x-icon" href="assets/pemkab.png">
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Font google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Font Awesomw -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Profil Desa | Web Desa Pandan</title>
 
     <style>
         body {
             background-color: #F5F7F8;
+            font-family: "Poppins", sans-serif;
         }
         .mx-7 {
-            margin: 0 4rem;
+            margin: 0 5rem;
+        }
+        .right-nav {
+            right: 26rem;
         }
         .py-12 {
             padding: 3rem 0
@@ -47,8 +66,8 @@ include 'navbar.php';
 <div class="max-w-full bg pt-24">
     <div class="px-7 lg:px-20">
         <div class="flex items-center gap-3 font-semibold">
-            <a href="/web-desa" class="text-sm lg:text-base">Beranda</a>
-            <p>></p>
+            <a href="/web-desa" class="text-sm lg:text-base"><i class="fa-solid fa-house"></i></a>
+            <p>/</p>
             <p class="text-[#06D001] text-sm lg:text-base">Profil Desa</p>
         </div>
     </div>
@@ -58,51 +77,25 @@ include 'navbar.php';
 <div class="mx-w-full bg-white my-12 py-10 mx-7 border rounded-md shadow-md">
     <div class="px-7 lg:px-20">
         <div class="bg-slate-50 flex items-center py-2 border-left shadow-md">
-            <h1 class="text-xl uppercase text-[#06D001] px-6 font-bold lg:text-2xl">Profil Desa Pandan</h1>
+            <h1 class="text-sm uppercase text-[#06D001] px-6 font-bold lg:text-2xl">Profil Desa Pandan</h1>
         </div>
-        <div class="flex flex-col lg:flex-row lg:justify-between pt-7">
-            <div class="text-black mt-3 lg:w-1/2 flex flex-col justify-center order-2 lg:order-1">
+            <div class="text-black mt-3">
                 <h1 class="py-2 font-bold text-xl lg:text-3xl text-[#06D001]">Desa Pandan</h1>
-                <p class="text-sm text-slate-500 lg:text-base">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum esse repudiandae, obcaecati praesentium adipisci recusandae modi officia soluta distinctio, ullam blanditiis in molestiae similique asperiores consequuntur doloribus sequi fugit iusto.</p>
+                <?php foreach($profil as $p) : ?>
+                <p class="text-sm text-slate-500 lg:text-lg"><?= $p['deskripsi']; ?></p>
+                <?php endforeach; ?>
             </div>
-            <div class="lg:w-1/2 order-1 lg:order-2">
+            <!-- <div class="lg:w-1/2 order-1 lg:order-2">
                 <img src="./assets/desa-pandan.jpg" alt="" class="mx-auto rounded-lg shadow-md w-full">
-            </div>
-        </div>
+            </div> -->
     </div>
 </div>
 
 
 <!-- Footer Start -->
-<div class="max-w-full bg-[#06D001] mt-10 py-12">
-    <div class="px-7 lg:px-20">
-        <div class="flex flex-col lg:flex-row lg:justify-between mb-5">
-            <div class="text-white border-b pb-3 lg:border-none">
-                <h1 class="text-lg lg:text-4xl uppercase font-bold">Desa Pandan</h1>
-                <p class="text-xs lg:text-base">Kec. Galis Kabupaten Pamekasan</p>
-            </div>
-            <div class="flex justify-between gap-10 mt-5 lg:mt-0">
-                <div class="text-white">
-                    <h1 class="text-lg lg:text-2xl font-bold">Jelajahi</h1>
-                    <div class="pt-3">
-                        <a href="/" class="block text-sm lg:text-base">Beranda</a>
-                        <a href="/" class="block text-sm lg:text-base">Berita</a>
-                        <a href="/" class="block text-sm lg:text-base">Galeri</a>
-                        <a href="/" class="block text-sm lg:text-base">Kontak Kami</a>
-                    </div>
-                </div>
-                <div class="text-white">
-                    <h1 class="text-lg lg:text-2xl font-bold">Kontak</h1>
-                    <div class="pt-3">
-                        <p class="text-sm lg:text-base">(+62) 896 9867 0374</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <p class="text-center pt-6 text-white font-semibold">Copyright By nkok</p>
-    </div>
-</div>
+<?php
+include 'footer.php'
+?>
 <!-- Footer End -->
 
 <script src="script.js"></script>

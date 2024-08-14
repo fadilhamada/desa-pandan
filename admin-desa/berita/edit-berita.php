@@ -38,6 +38,9 @@
         .mb-2 {
             margin-bottom: 1rem;
         }
+        .height {
+            height: 9rem;
+        }
         .bg-blue-500 {
             background-color: blue;
         }
@@ -68,9 +71,9 @@
         <div class="px-5 py-2">
             <div class="font-bold py-3 text-base flex gap-3 mb-3">
                 <a href="/web-desa/admin-desa/dashboard.php">Dashboard</a>
-                <p>></p>
+                <p>/</p>
                 <a href="/web-desa/admin-desa/berita.php">Berita</a>
-                <p>></p>
+                <p>/</p>
                 <h1 class="text-[#06D001]">Tambah data</h1>
             </div>
             <form action="" method="POST" enctype="multipart/form-data">
@@ -80,12 +83,8 @@
                     <input type="text" name="judul" id="judul" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan judul" value="<?= $data['judul']; ?>" required>
                 </div>
                 <div class="mb-5">
-                    <label for="deskripsi_singkat" class="block mb-2">Deskripsi singkat</label>
-                    <input type="text" name="deskripsi_singkat" id="deskripsi_singkat" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan deskripsi singkat" value="<?= $data['deskripsi_singkat']; ?>" required>
-                </div>
-                <div class="mb-5">
                     <label for="deskripsi" class="block mb-2">Deskripsi</label>
-                    <input type="text" name="deskripsi" id="deskripsi" class="border px-3 py-1 rounded-md w-full outline-none" placeholder="Masukkan deskripsi" value="<?= $data['deskripsi']; ?>" required>
+                    <textarea name="deskripsi" id="deskripsi" class="border w-full height rounded-md px-3 py-1" placeholder="Masukkan deskripsi"><?= $data['deskripsi']; ?></textarea>
                 </div>
                 <div class="mb-5">
                     <label for="gambar" class="block mb-2">Gambar</label>
@@ -95,7 +94,7 @@
                 </div>
                 <div class="flex justify-end gap-4">
                     <button type="submit" name="submit" class="bg-blue-500 text-white px-3 py-2 rounded-md shadow-md">Simpan</button>
-                    <a href="/web-desa/admin-desa/berita.php" class="bg-red-500 text-white px-3 py-2 rounded-md shadow-md">Kembali</a>
+                    <a href="../berita.php" class="bg-red-500 text-white px-3 py-2 rounded-md shadow-md">Kembali</a>
                 </div>
             </form>
         </div>

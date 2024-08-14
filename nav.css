@@ -1,0 +1,13 @@
+
+
+#width {
+    width: 4rem;
+    height: 4rem;
+}
+
+@media (max-width: 540px) {
+    #width {
+        width: 3rem;
+        height: 3rem;
+    } 
+}

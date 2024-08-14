@@ -1,6 +1,16 @@
 <?php
-
+session_start();
+if(!isset($_SESSION['username'])) {
+    return header("Location: login.php");
+    exit;
+}
 require 'function.php';
+
+$jumDataHalaman = 4;
+$jumData = count(jabatan("SELECT * FROM user"));
+$jumHalaman = ceil($jumData / $jumDataHalaman);
+$actived = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$dataAwal = ($jumDataHalaman * $actived) - $jumDataHalaman;
 
 $data = jabatan("SELECT * FROM user");
 
@@ -24,17 +34,9 @@ $data = jabatan("SELECT * FROM user");
   
 </head>
 <body>
-<div class="w-full fixed top-0 left-0 py-5 bg-white border-b z-10">
-    <div class="px-7">
-        <div class="flex justify-between">
-            <div class="flex gap-10">
-                <h1>Desa Pandan</h1>
-                <button id="toggle"><i class="fa-solid fa-bars"></i></button>
-            </div>
-            <a href="/">Admin</a>
-        </div>
-    </div>
-</div>
+<?php
+    include '../header.php'
+?>
 <div class="flex">
     <?php
         include '../sidebar.php'
@@ -51,8 +53,64 @@ $data = jabatan("SELECT * FROM user");
                 <a href="/web-desa/admin-desa/admin/post-user.php" class="px-4 py-2 bg-blue-500 font-semibold text-white rounded-md" id="tambah">Tambah Data</a>
                 <div class="overflow-x-auto mt-8">
             </div>
-                <table class="text-sm text-left w-full">
+                <table class="text-sm text-left w-full mb-5">
+                    <?php if($_SESSION['jenis'] == 'admin') : ?>
                     <thead class="text-xs uppercase bg-white text-center shadow-md">
+                        <tr class="border-b border-t border-black">
+                            <th scope="col" class="px-3 py-3 text-left">
+                                No
+                            </th>
+                            <th scope="col" class="px-3 py-3">
+                                Nama
+                            </th>
+                            <th scope="col" class="px-3 py-3">
+                                Username
+                            </th>
+                            <th scope="col" class="px-3 py-3">
+                                Jenis kelamin
+                            </th>
+                            <th scope="col" class="px-3 py-3">
+                                Alamat
+                            </th>
+                            <th scope="col" class="px-3 py-3">
+                                No. hp
+                            </th>
+                            <th scope="col" class="px-3 py-3">
+                                Type
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <?php $i = 1; ?>
+                    <?php foreach($data as $d) : ?>
+                    <tr class="bg-white border-b border-black">
+                        <th scope="row" class="px-3 py-4 text-left">
+                            <?= $i; ?>
+                        </th>
+                        <td class="px-3 py-4">
+                        <?= $d['nama']; ?>
+                        </td>
+                        <td class="px-3 py-4">
+                        <?= $d['username']; ?>
+                        </td>
+                        <td class="px-3 py-4">
+                        <?= $d['j_kelamin']; ?>
+                        </td>
+                        <td class="px-3 py-4">
+                        <?= $d['alamat']; ?>
+                        </td>
+                        <td class="px-3 py-4">
+                        <?= $d['no_hp']; ?>
+                        </td>
+                        <td class="px-3 py-4">
+                        <?= $d['jenis']; ?>
+                        </td>
+                    </tr>
+                    <?php $i++; ?>
+                    <?php endforeach; ?>
+                    </tbody>
+                    <?php else : ?>
+                        <thead class="text-xs uppercase bg-white text-center shadow-md">
                         <tr class="border-b border-t border-black">
                             <th scope="col" class="px-3 py-3 text-left">
                                 No
@@ -100,10 +158,10 @@ $data = jabatan("SELECT * FROM user");
                         <?= $d['alamat']; ?>
                         </td>
                         <td class="px-3 py-4">
-                        <?= $d['no']; ?>
+                        <?= $d['no_hp']; ?>
                         </td>
                         <td class="px-3 py-4">
-                        <?= $d['type']; ?>
+                        <?= $d['jenis']; ?>
                         </td>
                         <td class="px-3 py-4 text-white">
                            <button class="px-2 py-1 rounded-md" id="blue"><a href="galeri/edit-galeri.php">Edit</a></button>
@@ -113,7 +171,15 @@ $data = jabatan("SELECT * FROM user");
                     <?php $i++; ?>
                     <?php endforeach; ?>
                     </tbody>
+                    <?php endif; ?>
                 </table>
+                <?php for($i = 1; $i <= $jumHalaman; $i++) : ?>
+                    <?php if($i == $actived) : ?>
+                        <a href="?page=<?= $i; ?>" class="border text-white px-3 py-2 bg-[#06D001] rounded-md"><?= $i; ?></a>
+                    <?php else :  ?>
+                        <a href="?page=<?= $i; ?>" class="border px-3 py-2 rounded-md"><?= $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
             </div>
         </div>
     </div>
